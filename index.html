@@ -34,7 +34,7 @@
         <div class="hero-content">
             <span class="greeting">Hello, I'm</span>
             <h1 class="name">MJ Ashraf</h1>
-            <h2 class="title">Flutter Developer <span class="highlight">& Vibe Coder</span></h2>
+            <h2 class="title">And I'm a <span class="typing-text"></span><span class="cursor">&nbsp;</span></h2>
             <p class="description">Crafting exceptional digital experiences with code and creativity. I build apps that
                 not only work seamlessly but feel alive.</p>
             <div class="hero-btns">
@@ -194,36 +194,56 @@
             <p>Let's create something amazing together</p>
         </div>
         <div class="contact-container">
-            <form class="contact-form">
+            <script type="text/javascript">var submitted = false;</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                onload="if(submitted) { showThankYouModal(); }"></iframe>
+            <form class="contact-form"
+                action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfEQywSk_g6RfZuAauxC2TaAKiLVbDvT4hT3REi-gA3OLN_RA/formResponse"
+                method="POST" target="hidden_iframe" onsubmit="submitted=true;">
                 <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
+                    <input type="text" name="entry.1362087267" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="email" name="entry.1035170959" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <textarea name="entry.1871630368" placeholder="Your Message" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="btn-primary">Send Message</button>
             </form>
             <div class="contact-info">
                 <div class="info-item">
                     <i class="fa-solid fa-envelope"></i>
-                    <p>mj.ashraf@vibecoding.com</p>
+                    <p>mjashraf94@gmail.com</p>
                 </div>
                 <div class="info-item">
                     <i class="fa-solid fa-location-dot"></i>
                     <p>Remote / Worldwide</p>
                 </div>
                 <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/MJ-ASHRAF" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="#"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="#"><i class="fa-brands fa-twitter"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/919048046876" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
+        </div>
     </section>
+
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <h2>Message Sent!</h2>
+            <p>Thanks for reaching out. I'll get back to you sooner than you can say "Vibe Check".</p>
+            <button id="closeModalBtn" class="btn-primary">Awesome</button>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; <span id="year"></span> MJ Ashraf. All rights reserved.</p>

@@ -204,12 +204,46 @@ ul {
     width: 350px;
     height: 350px;
     border-radius: 50%;
-    overflow: hidden;
+    /* overflow: hidden; Removed to let ripple show */
     border: 3px solid var(--primary-color);
     box-shadow: 0 0 30px rgba(112, 0, 255, 0.4);
     z-index: 2;
     position: relative;
     animation: float 6s ease-in-out infinite;
+    cursor: pointer;
+    /* Indicate interactivity */
+}
+
+/* Ripple Effect */
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--secondary-color);
+    opacity: 0;
+    z-index: -1;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        border-width: 2px;
+    }
+
+    100% {
+        width: 150%;
+        height: 150%;
+        opacity: 0;
+        border-width: 0px;
+    }
 }
 
 .image-container::after {
@@ -219,6 +253,8 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    /* Ensure overlay is rounded */
     background: linear-gradient(135deg, rgba(112, 0, 255, 0.4), rgba(0, 240, 255, 0.2));
     mix-blend-mode: hard-light;
     pointer-events: none;
@@ -228,6 +264,8 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+    /* Ensure image is rounded */
 }
 
 @keyframes float {
@@ -609,5 +647,176 @@ footer {
 
     .about-content {
         flex-direction: column;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: rgba(22, 22, 22, 0.95);
+    margin: 15% auto;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 50px rgba(112, 0, 255, 0.3);
+    border: 1px solid var(--primary-color);
+    animation: slideIn 0.4s ease;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: var(--text-muted);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--secondary-color);
+}
+
+.modal-icon i {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #ccc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-content p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+#closeModalBtn {
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Hero Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content>* {
+    opacity: 0;
+    /* Start hidden */
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.greeting {
+    animation-delay: 0.2s;
+}
+
+.name {
+    animation-delay: 0.4s;
+    background: linear-gradient(to right, #fff, #aaa, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 0.8s ease forwards 0.4s, shine 5s linear infinite;
+}
+
+.title {
+    animation-delay: 0.6s;
+}
+
+.description {
+    animation-delay: 0.8s;
+}
+
+.hero-btns {
+    animation-delay: 1s;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Typewriter Cursor */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: var(--secondary-color);
+    animation: blink 1s infinite;
+}
+
+.typing-text {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
     }
 }

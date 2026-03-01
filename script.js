@@ -152,8 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
             charIndex--;
         } else {
             // Add next character
-            displayText = currentWord.substring(0, charIndex + 1);
-            charIndex++;
+            if (wordIndex === 0) {
+                // Instantly display the first phrase
+                charIndex = currentWord.length;
+                displayText = currentWord;
+            } else {
+                displayText = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
         }
 
         // Re-apply styling for special characters on the partial text
@@ -201,18 +207,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function triggerHeroSequence() {
-        typingText.textContent = ''; // Clear text immediately so it doesn't show during fade-in
-        restartHeroAnimations();
+        // Reset Typewriter variables
+        wordIndex = 0;
+        charIndex = 0;
+        isDeleting = false;
+        typeLoopCount = 0;
 
-        // Wait for Hero animation to complete (approx 1.5s) then restart typewriter
-        setTimeout(() => {
-            // Reset Typewriter variables
-            wordIndex = 0;
-            charIndex = 0;
-            isDeleting = false;
-            typeLoopCount = 0;
-            type(); // Start typing again
-        }, 1500);
+        // Calling type() immediately handles instantly setting the first word text
+        // and setting the 2s wait before it starts backspacing.
+        type();
+
+        // Restarting the container animation right after text is inserted
+        // means it fades in along with the rest of the Hero visual elements.
+        restartHeroAnimations();
     }
 
     // Start initial typing

@@ -218,3 +218,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start initial typing
     type();
 });
+
+// Dual Form Submission (Google Sheets + WhatsApp)
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        // We DON'T prevent default here because we want the form to submit to the hidden_iframe for Google Sheets!
+
+        // Extract field values
+        const nameInput = this.querySelector('input[name="entry.1362087267"]');
+        const emailInput = this.querySelector('input[name="entry.1035170959"]');
+        const messageInput = this.querySelector('textarea[name="entry.1871630368"]');
+
+        const userName = nameInput ? nameInput.value.trim() : '';
+        const userEmail = emailInput ? emailInput.value.trim() : '';
+        const userMessage = messageInput ? messageInput.value.trim() : '';
+
+        // Format message for WhatsApp
+        const whatsappNumber = '919048046876';
+        let whatsappText = `Hello MJ Ashraf! I have a new message for you from your portfolio website.%0A%0A`;
+        whatsappText += `*Name:* ${encodeURIComponent(userName)}%0A`;
+        whatsappText += `*Email:* ${encodeURIComponent(userEmail)}%0A`;
+        whatsappText += `*Message:* ${encodeURIComponent(userMessage)}`;
+
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
+
+        // Open WhatsApp in a new tab
+        window.open(whatsappUrl, '_blank');
+    });
+}

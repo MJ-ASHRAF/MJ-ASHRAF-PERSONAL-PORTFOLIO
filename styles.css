@@ -360,11 +360,39 @@ ul {
     color: var(--text-muted);
 }
 
+/* Skills Sticky Scroll Concept */
+.skills-scroll-container {
+    height: 250vh;
+    /* Extends vertical scroll to allow horizontal scrubbing */
+    position: relative;
+    width: 100%;
+}
+
+.skills-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Added specific padding override to align vertically centered */
+.skills-sticky .section.skills {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
 /* Skills Section */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: nowrap;
     gap: 2rem;
+    width: max-content;
+    will-change: transform;
+    /* padding-right ensures it doesn't snap to edge awkwardly */
+    padding-right: 10vw;
 }
 
 .skill-card {
@@ -374,6 +402,9 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: var(--transition);
     text-align: center;
+    width: 320px;
+    /* Fixed width for horizontal layout */
+    flex-shrink: 0;
 }
 
 .skill-card:hover {
@@ -817,6 +848,129 @@ footer {
     }
 
     50% {
+        opacity: 0;
+    }
+}
+
+/* Starry Background */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+.comet {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+        -10px 10px 20px rgba(0, 240, 255, 0.5),
+        -20px 20px 30px rgba(112, 0, 255, 0.3);
+    opacity: 0;
+    transform: rotate(-45deg);
+    animation: cometFall linear infinite;
+}
+
+.comet::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+}
+
+@keyframes cometFall {
+    0% {
+        top: -10%;
+        left: 110%;
+        opacity: 1;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        top: 110%;
+        left: -10%;
+        opacity: 0;
+    }
+}
+
+/* Localized Comet near profile picture */
+.profile-comet {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+        -10px 10px 20px rgba(0, 240, 255, 0.5),
+        -20px 20px 30px rgba(112, 0, 255, 0.3);
+    transform: rotate(-45deg);
+    animation: profileCometFall 7s linear infinite;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.profile-comet::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+}
+
+@keyframes profileCometFall {
+    0% {
+        top: -20%;
+        left: 120%;
+        opacity: 1;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    100% {
+        top: 120%;
+        left: -20%;
         opacity: 0;
     }
 }

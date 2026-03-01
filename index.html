@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <div id="stars-container"></div>
     <nav class="navbar">
         <div class="logo">MJ.</div>
         <ul class="nav-links">
@@ -45,6 +46,7 @@
         <div class="hero-visual">
             <div class="glow-circle"></div>
             <div class="image-container">
+                <div class="profile-comet"></div>
                 <img src="assets/photo_2026-02-16_23-25-41.jpg" alt="MJ Ashraf" class="profile-photo">
             </div>
         </div>
@@ -80,40 +82,44 @@
         </div>
     </section>
 
-    <section id="skills" class="section skills">
-        <div class="section-header">
-            <h2>Skills & Expertise</h2>
-            <p>My technical arsenal</p>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fa-brands fa-flutter"></i>
-                <h3>Flutter & Dart</h3>
-                <p>Cross-platform mastery for mobile, web, and desktop.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-code"></i>
-                <h3>Vibe Coding</h3>
-                <p>Aesthetic-driven development and flow state optimization.</p>
-            </div>
+    <div id="skills" class="skills-scroll-container">
+        <div class="skills-sticky">
+            <section class="section skills" style="padding-top: 0; padding-bottom: 0;">
+                <div class="section-header">
+                    <h2>Skills & Expertise</h2>
+                    <p>My technical arsenal</p>
+                </div>
+                <div class="skills-grid" id="skills-grid">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-flutter"></i>
+                        <h3>Flutter & Dart</h3>
+                        <p>Cross-platform mastery for mobile, web, and desktop.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Vibe Coding</h3>
+                        <p>Aesthetic-driven development and flow state optimization.</p>
+                    </div>
 
-            <div class="skill-card">
-                <i class="fa-solid fa-mobile-screen"></i>
-                <h3>Mobile UI/UX</h3>
-                <p>Designing fluid and responsive mobile experiences.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-server"></i>
-                <h3>Firebase</h3>
-                <p>Backend-as-a-service for real-time apps.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <h3>Animations</h3>
-                <p>Bringing apps to life with Rive and custom animations.</p>
-            </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <h3>Mobile UI/UX</h3>
+                        <p>Designing fluid and responsive mobile experiences.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-server"></i>
+                        <h3>Firebase</h3>
+                        <p>Backend-as-a-service for real-time apps.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Animations</h3>
+                        <p>Bringing apps to life with Rive and custom animations.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
 
     <section id="projects" class="section projects">
         <div class="section-header">

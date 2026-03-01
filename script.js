@@ -219,31 +219,78 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
 });
 
-// Dual Form Submission (Google Sheets + WhatsApp)
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-        // We DON'T prevent default here because we want the form to submit to the hidden_iframe for Google Sheets!
+// Starry Background Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const starsContainer = document.getElementById('stars-container');
+    if (!starsContainer) return;
 
-        // Extract field values
-        const nameInput = this.querySelector('input[name="entry.1362087267"]');
-        const emailInput = this.querySelector('input[name="entry.1035170959"]');
-        const messageInput = this.querySelector('textarea[name="entry.1871630368"]');
+    function createStar() {
+        const star = document.createElement('div');
+        star.classList.add('star');
 
-        const userName = nameInput ? nameInput.value.trim() : '';
-        const userEmail = emailInput ? emailInput.value.trim() : '';
-        const userMessage = messageInput ? messageInput.value.trim() : '';
+        // Randomize size, position, and animation duration
+        const size = Math.random() * 3 + 1; // 1px to 4px
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`; // 2s to 5s
 
-        // Format message for WhatsApp
-        const whatsappNumber = '919048046876';
-        let whatsappText = `Hello MJ Ashraf! I have a new message for you from your portfolio website.%0A%0A`;
-        whatsappText += `*Name:* ${encodeURIComponent(userName)}%0A`;
-        whatsappText += `*Email:* ${encodeURIComponent(userEmail)}%0A`;
-        whatsappText += `*Message:* ${encodeURIComponent(userMessage)}`;
+        starsContainer.appendChild(star);
+    }
 
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
+    function createComet() {
+        const comet = document.createElement('div');
+        comet.classList.add('comet');
 
-        // Open WhatsApp in a new tab
-        window.open(whatsappUrl, '_blank');
+        // Randomize starting position and animation duration
+        comet.style.top = `${Math.random() * 50 - 20}vh`; // Start somewhat from the top/higher up
+        comet.style.left = `${Math.random() * 100}vw`;
+        comet.style.animationDuration = `${Math.random() * 2 + 3}s`; // 3s to 5s
+
+        starsContainer.appendChild(comet);
+
+        // Remove comet after animation completes to avoid DOM clutter
+        setTimeout(() => {
+            comet.remove();
+        }, 5000); // Max animation duration
+    }
+
+    // Generate initial stars
+    for (let i = 0; i < 50; i++) {
+        createStar();
+    }
+
+    // Generate comets periodically
+    setInterval(createComet, 4000); // One comet every 4 seconds roughly
+});
+
+// Horizontal Scroll for Skills Section
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollContainer = document.querySelector('.skills-scroll-container');
+    const skillsGrid = document.getElementById('skills-grid');
+    const stickyContainer = document.querySelector('.skills-sticky');
+
+    if (!scrollContainer || !skillsGrid || !stickyContainer) return;
+
+    window.addEventListener('scroll', () => {
+        const offsetTop = scrollContainer.offsetTop;
+        const containerHeight = scrollContainer.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        // Determine how far down the user has scrolled within the outer container
+        let scrollPercentage = (scrollY - offsetTop) / (containerHeight - viewportHeight);
+
+        // Clamp the percentage between 0 and 1
+        scrollPercentage = Math.max(0, Math.min(1, scrollPercentage));
+
+        // Calculate maximum translatable distance (total width of grid minus visible area width)
+        const maxTranslate = skillsGrid.scrollWidth - stickyContainer.offsetWidth + (window.innerWidth * 0.1);
+        // Adding 10vw back because we added padding-right in CSS
+
+        if (maxTranslate > 0) {
+            skillsGrid.style.transform = `translateX(-${scrollPercentage * maxTranslate}px)`;
+        }
     });
-}
+});
